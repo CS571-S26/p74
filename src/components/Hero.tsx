@@ -45,8 +45,8 @@ export default function Hero() {
                 </div>
 
                 {/* Right: Image Stack */}
-                <div className="flex-1 w-full max-w-xl lg:max-w-none">
-                    <div className="relative h-[420px] lg:h-[400px]">
+                <div className="flex-1 w-full">
+                    <div className="relative h-[300px] lg:h-[400px]">
                         <Stack
                             cards={images.map(([src, alt]) => (
                                 <img src={src} alt={alt} className="w-full h-full object-cover" draggable={false} />
