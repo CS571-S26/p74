@@ -6,4 +6,12 @@
 @theme {
     --font-vietnam-pro: "Be Vietnam Pro", sans-serif;
     --font-display: "DM Serif Display", serif;
+
+    /* Brand palette — edit these to retheme the whole site */
+    --color-brand:        #3b82f6; /* blue-500 — primary buttons, borders, text */
+    --color-brand-hover:  #2563eb; /* blue-600 — hover state */
+    --color-brand-dark:   #1d4ed8; /* blue-700 — pressed / deep accent */
+    --color-brand-light:  #eff6ff; /* blue-50  — hover backgrounds */
+    --color-brand-subtle: #dbeafe; /* blue-100 — decorative blobs, shadows */
+    --color-brand-muted:  #bfdbfe; /* blue-200 — soft shadows */
 }
