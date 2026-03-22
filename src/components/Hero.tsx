@@ -16,14 +16,14 @@ export default function Hero() {
                 <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-brand-light rounded-full blur-3xl opacity-80 translate-x-1/4 translate-y-1/4" />
             </div>
 
-            <div className="relative max-w-7xl mx-auto px-6 py-20 lg:py-28 flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+            <div className="relative max-w-7xl mx-auto px-6 py-30 lg:py-40 flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
                 {/* Left: Text content */}
                 <div className="flex-1 text-center lg:text-left">
-                    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6 font-display">
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6 font-display">
                         <span className="text-brand">Dr. Trang Eye Clinic</span>
                         {' '} - Caring for your eyes with our heart
                     </h1>
-                    <p className="text-gray-500 text-lg leading-relaxed max-w-xl mx-auto lg:mx-0 mb-10 font-vietnam-pro font-thin">
+                    <p className="text-gray-700 text-lg leading-relaxed max-w-xl mx-auto lg:mx-0 mb-10 font-vietnam-pro font-thin">
                         We not only provide comprehensive examination and treatment services for eye diseases
                         with high professional expertise and advanced techniques, but also with the enthusiasm and
                         dedication of our medical professionals.

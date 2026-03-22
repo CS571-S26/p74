@@ -1,27 +1,36 @@
-import { useState, useEffect, useRef } from 'react'
-import logoImg from '../assets/logo.svg'
+"use client"
+
+import { useState, useEffect, useRef } from "react"
+import { motion, AnimatePresence } from "framer-motion"
+import { Menu, ChevronDown } from "lucide-react"
+import logoImg from "../assets/logo.svg"
 
 const services = [
-  'Example service 1',
-  'Example service 2',
-  'Example service 3',
-  'Example service 4',
-  'Really long service name that should be tested for overflow handling',
+  "Example service 1",
+  "Example service 2",
+  "Example service 3",
+  "Example service 4",
 ]
 
 const navLinks = [
-  { label: 'About', href: '#' },
-  { label: 'Services', href: '#', dropdown: services },
-  { label: 'FAQs', href: '#' },
-  { label: 'Contact', href: '#' },
+  { label: "About", href: "#" },
+  { label: "Services", href: "#", dropdown: services },
+  { label: "FAQs", href: "#" },
+  { label: "Contact", href: "#" },
 ]
 
-export default function Navbar() {
+const NavBar = () => {
+  const [isOpen, setIsOpen] = useState(false)
+  const [dropdownOpen, setDropdownOpen] = useState(false)
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false)
   const [visible, setVisible] = useState(true)
   const [scrolled, setScrolled] = useState(false)
-  const [dropdownOpen, setDropdownOpen] = useState(false)
-  const [mobileOpen, setMobileOpen] = useState(false)
   const lastScrollY = useRef(0)
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen)
+    setMobileServicesOpen(false)
+  }
 
   useEffect(() => {
     const TOLERANCE = 60
@@ -39,157 +48,184 @@ export default function Navbar() {
         lastScrollY.current = current
       }
     }
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
   return (
-    <header
-      className={[
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        visible ? 'translate-y-0' : '-translate-y-full',
-        scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100' : 'bg-white',
-      ].join(' ')}
+    <motion.div
+      className="fixed top-0 left-0 right-0 z-50 flex justify-center w-full pt-4 px-4 pointer-events-none"
+      initial={{ y: 0 }}
+      animate={{ y: visible ? 0 : -120 }}
+      transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
     >
-      <nav className="max-w-7xl mx-auto px-10 h-20 flex items-center justify-between gap-10">
-
+      <div
+        className={[
+          "flex items-center justify-between px-6 py-3 rounded-full w-full max-w-4xl relative z-10 transition-all duration-300 pointer-events-auto",
+          scrolled
+            ? "bg-white shadow-xl shadow-gray-300/40"
+            : "bg-white/80 backdrop-blur-sm shadow-md shadow-brand-muted/20",
+        ].join(" ")}
+      >
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2.5 shrink-0 cursor-pointer">
-          <img src={logoImg} alt="Logo" className="w-30 h" />
+        <a href="#" className="flex items-center shrink-0">
+          <img
+            src={logoImg}
+            alt="Dr. Trang Eye Clinic"
+            className="h-8 w-auto"
+          />
         </a>
 
-        {/* Desktop nav */}
-        <ul className="hidden lg:flex items-center gap-2 flex-1 justify-center">
+        {/* Desktop Navigation */}
+        <nav className="hidden lg:flex items-center space-x-1">
           {navLinks.map((link) =>
             link.dropdown ? (
-              <li
+              <div
                 key={link.label}
                 className="relative"
                 onMouseEnter={() => setDropdownOpen(true)}
                 onMouseLeave={() => setDropdownOpen(false)}
               >
                 <button
-                  className="flex items-center gap-1 px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-brand-hover hover:bg-brand-light transition-colors duration-150 cursor-pointer"
+                  className="flex items-center gap-1 px-3 py-2 text-base text-gray-700 hover:text-brand-hover transition-colors font-medium rounded-md cursor-pointer"
                 >
                   {link.label}
-                  <svg
-                    className={`w-3.5 h-3.5 transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`}
-                    viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2"
-                  >
-                    <path d="M4 6l4 4 4-4" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
+                  <ChevronDown
+                    className={`w-3.5 h-3.5 transition-transform duration-200 ${dropdownOpen ? "rotate-180" : ""}`}
+                  />
                 </button>
 
-                {/* Dropdown */}
-                <div
-                  className={[
-                    'absolute top-full left-1/2 -translate-x-1/2 pt-2 min-w-max bg-white rounded-xl shadow-xl border border-gray-100 py-1.5 transition-all duration-200 origin-top',
-                    dropdownOpen ? 'opacity-100 scale-100 pointer-events-auto' : 'opacity-0 scale-95 pointer-events-none',
-                  ].join(' ')}
-                >
-                  {services.map((s) => (
-                    <a
-                      key={s}
-                      href="#"
-                      className="block px-4 py-2.5 text-sm text-gray-700 hover:text-brand-hover hover:bg-brand-light transition-colors duration-100 whitespace-nowrap cursor-pointer"
-                      onClick={() => setDropdownOpen(false)}
+                <AnimatePresence>
+                  {dropdownOpen && (
+                    <motion.div
+                      className="absolute top-full left-1/2 -translate-x-1/2 pt-2 min-w-max"
+                      initial={{ opacity: 0, y: -5, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: -5, scale: 0.95 }}
+                      transition={{ duration: 0.15 }}
                     >
-                      {s}
-                    </a>
-                  ))}
-                </div>
-              </li>
+                      <div className="bg-white rounded-xl shadow-xl border border-gray-100 py-1.5">
+                        {services.map((s) => (
+                          <a
+                            key={s}
+                            href="#"
+                            className="block px-4 py-2.5 text-base text-gray-700 hover:text-brand-hover hover:bg-brand-light transition-colors whitespace-nowrap"
+                            onClick={() => setDropdownOpen(false)}
+                          >
+                            {s}
+                          </a>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             ) : (
-              <li key={link.label}>
+              <div key={link.label}>
                 <a
                   href={link.href}
-                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-brand-hover hover:bg-brand-light transition-colors duration-150 cursor-pointer"
+                  className="block px-3 py-2 text-base text-gray-700 hover:text-brand-hover transition-colors font-medium rounded-md"
                 >
                   {link.label}
                 </a>
-              </li>
+              </div>
             )
           )}
-        </ul>
+        </nav>
 
-        {/* CTA */}
-        <a
-          href="#"
-          className="hidden lg:inline-flex items-center gap-2 bg-brand hover:bg-brand-hover text-white text-base font-semibold px-6 py-2.5 rounded-full shadow-md shadow-brand-muted transition-all duration-200 shrink-0 cursor-pointer"
-        >
-          Book appointment
-        </a>
+        {/* Desktop CTA */}
+        <div className="hidden lg:block">
+          <a
+            href="#"
+            className="inline-flex items-center justify-center px-5 py-2 text-base text-white bg-brand rounded-full hover:bg-brand-hover transition-colors font-semibold shadow-md shadow-brand-muted"
+          >
+            Book appointment
+          </a>
+        </div>
 
-        {/* Mobile hamburger */}
+        {/* Mobile Menu Button */}
         <button
-          onClick={() => setMobileOpen((o) => !o)}
-          className="lg:hidden p-2 rounded-md text-gray-600 hover:text-brand-hover hover:bg-brand-light transition-colors cursor-pointer"
-          aria-label="Toggle menu"
+          className="lg:hidden flex items-center cursor-pointer"
+          onClick={toggleMenu}
         >
-          {mobileOpen ? (
-            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M18 6L6 18M6 6l12 12" strokeLinecap="round" />
-            </svg>
-          ) : (
-            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M4 6h16M4 12h16M4 18h16" strokeLinecap="round" />
-            </svg>
-          )}
+          <Menu className="h-6 w-6 text-gray-900" />
         </button>
-      </nav>
-
-      {/* Mobile menu */}
-      <div
-        className={[
-          'lg:hidden overflow-hidden transition-all duration-300 bg-white border-t border-gray-100',
-          mobileOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0',
-        ].join(' ')}
-      >
-        <ul className="px-6 py-4 flex flex-col gap-1">
-          {navLinks.map((link) =>
-            link.dropdown ? (
-              <li key={link.label}>
-                <details className="group">
-                  <summary className="flex items-center justify-between px-3 py-2.5 rounded-md text-base font-medium text-gray-700 hover:text-brand-hover hover:bg-brand-light cursor-pointer list-none transition-colors">
-                    {link.label}
-                    <svg className="w-3.5 h-3.5 group-open:rotate-180 transition-transform" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M4 6l4 4 4-4" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </summary>
-                  <ul className="mt-1 ml-4 border-l-2 border-brand-subtle pl-3 flex flex-col gap-0.5">
-                    {services.map((s) => (
-                      <li key={s}>
-                        <a href="#" className="block px-2 py-2 text-sm text-gray-600 hover:text-brand-hover transition-colors cursor-pointer">
-                          {s}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </details>
-              </li>
-            ) : (
-              <li key={link.label}>
-                <a
-                  href={link.href}
-                  className="block px-3 py-2.5 rounded-md text-base font-medium text-gray-700 hover:text-brand-hover hover:bg-brand-light transition-colors cursor-pointer"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {link.label}
-                </a>
-              </li>
-            )
-          )}
-          <li className="pt-2">
-            <a
-              href="#"
-              className="block text-center bg-brand hover:bg-brand-hover text-white text-base font-semibold px-5 py-3 rounded-full transition-colors cursor-pointer"
-              onClick={() => setMobileOpen(false)}
-            >
-              Book an appointment
-            </a>
-          </li>
-        </ul>
       </div>
-    </header>
+
+      {/* Mobile Menu Dropdown */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            className="absolute top-full left-4 right-4 mt-2 bg-white rounded-2xl shadow-xl shadow-gray-300/40 px-6 py-5 lg:hidden pointer-events-auto overflow-hidden"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <div className="flex flex-col space-y-1">
+              {navLinks.map((link) =>
+                link.dropdown ? (
+                  <div key={link.label}>
+                    <button
+                      className="flex items-center justify-between w-full text-base text-gray-900 font-medium py-3 cursor-pointer"
+                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                    >
+                      {link.label}
+                      <ChevronDown
+                        className={`w-4 h-4 transition-transform duration-200 ${mobileServicesOpen ? "rotate-180" : ""}`}
+                      />
+                    </button>
+                    <AnimatePresence>
+                      {mobileServicesOpen && (
+                        <motion.div
+                          className="bg-brand-light rounded-xl px-4 py-2 flex flex-col overflow-hidden"
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          {services.map((s) => (
+                            <a
+                              key={s}
+                              href="#"
+                              className="block py-2.5 text-sm text-gray-700 hover:text-brand-hover transition-colors"
+                              onClick={toggleMenu}
+                            >
+                              {s}
+                            </a>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                ) : (
+                  <div key={link.label}>
+                    <a
+                      href={link.href}
+                      className="block text-base text-gray-900 font-medium py-3"
+                      onClick={toggleMenu}
+                    >
+                      {link.label}
+                    </a>
+                  </div>
+                )
+              )}
+
+              <div className="pt-4">
+                <a
+                  href="#"
+                  className="inline-flex items-center justify-center w-full px-5 py-3 text-base text-white bg-brand rounded-full hover:bg-brand-hover transition-colors font-semibold"
+                  onClick={toggleMenu}
+                >
+                  Book appointment
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
   )
 }
+
+export default NavBar;

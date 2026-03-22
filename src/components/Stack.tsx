@@ -115,6 +115,7 @@ export default function Stack({
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
+                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.05)',
               }}
               onClick={() => sendToBackOnClick && sendToBack(card.id)}
               animate={{
