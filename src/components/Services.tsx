@@ -34,10 +34,10 @@ const services = [
 
 export default function Services() {
     return (
-        <section className="relative bg-white py-20 lg:py-28">
+        <section className="relative bg-gradient-to-b from-white to-brand-light py-20 lg:py-28">
             <div className="max-w-7xl mx-auto px-6">
                 {/* Header */}
-                <Header subtitle="Dr. Trang Services" titleFirst="Let us take care" titleSecond="of your eyes!" />
+                <Header subtitle="Dr. Trang Services" titleFirst="Let us take care of" titleSecond="your eyes!" />
 
                 {/* Service items */}
                 <div className="space-y-24">
@@ -59,10 +59,10 @@ export default function Services() {
 
                             {/* Text */}
                             <div className="flex-1">
-                                <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4 font-display max-w-md font-medium">
+                                <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4 font-display lg:max-w-md font-medium">
                                     {service.title}
                                 </h3>
-                                <p className="text-gray-600 leading-relaxed mb-6 max-w-md">
+                                <p className="text-gray-600 leading-relaxed mb-6 lg:max-w-md">
                                     {service.description}
                                 </p>
                                 <a
