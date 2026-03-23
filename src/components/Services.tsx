@@ -39,7 +39,7 @@ const services = [
 export default function Services() {
   return (
     <section className="relative bg-gradient-to-b from-white to-brand-light py-20 lg:py-28">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-10">
         {/* Header */}
         <Header
           subtitle="Dr. Trang Services"

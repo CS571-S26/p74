@@ -47,7 +47,7 @@ const reasons = [
 export default function WhyChooseUs() {
   return (
     <section className="relative bg-white py-20 lg:py-28">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-10">
         {/* Header */}
         <Header
           subtitle="Why choose Dr. Trang"

@@ -28,7 +28,7 @@ export default function Hero() {
         <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-brand-light rounded-full blur-3xl opacity-80 translate-x-1/4 translate-y-1/4" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-6 py-30 lg:py-40 flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+      <div className="relative max-w-7xl mx-auto px-10 py-30 lg:py-40 flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
         {/* Left: Text content */}
         <div className="flex-1 text-center lg:text-left">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6 font-display">

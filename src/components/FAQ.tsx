@@ -62,7 +62,7 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
 export default function FAQ() {
   return (
     <section className="relative bg-white py-20 lg:py-28">
-      <div className="max-w-4xl mx-auto px-6">
+      <div className="max-w-4xl mx-auto px-10">
         {/* Header */}
         <Header
           subtitle="Frequently Asked Questions"

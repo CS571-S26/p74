@@ -12,7 +12,7 @@ const certifications = [
 export default function DoctorProfile() {
   return (
     <section className="relative bg-brand-light py-20 lg:py-28">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-10">
         <div className="relative bg-gradient-to-br from-brand to-brand-dark rounded-3xl overflow-visible flex flex-col lg:flex-row lg:items-center">
           {/* Text content */}
           <div className="relative z-10 p-10 lg:p-16 lg:w-[60%]">

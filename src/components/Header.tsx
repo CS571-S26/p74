@@ -2,10 +2,12 @@ export default function Header({
   subtitle,
   titleFirst,
   titleSecond,
+  description,
 }: {
   subtitle: string;
   titleFirst: string;
-  titleSecond: string;
+  titleSecond?: string;
+  description?: string;
 }) {
   return (
     <div className="text-center mb-20">
@@ -16,6 +18,9 @@ export default function Header({
         {titleFirst}
         <br className="hidden md:block" /> {titleSecond}
       </h2>
+      {description && (
+        <p className="text-gray-600 pt-4 max-w-xl mx-auto">{description}</p>
+      )}
     </div>
   );
 }
