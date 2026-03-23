@@ -1,56 +1,56 @@
-"use client"
+"use client";
 
-import { useState, useEffect, useRef } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Menu, ChevronDown } from "lucide-react"
-import logoImg from "../assets/logo.svg"
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, ChevronDown } from "lucide-react";
+import logoImg from "../assets/logo.svg";
 
 const services = [
   "Example service 1",
   "Example service 2",
   "Example service 3",
   "Example service 4",
-]
+];
 
 const navLinks = [
   { label: "About", href: "#" },
   { label: "Services", href: "#", dropdown: services },
   { label: "FAQs", href: "#" },
   { label: "Contact", href: "#" },
-]
+];
 
 const NavBar = () => {
-  const [isOpen, setIsOpen] = useState(false)
-  const [dropdownOpen, setDropdownOpen] = useState(false)
-  const [mobileServicesOpen, setMobileServicesOpen] = useState(false)
-  const [visible, setVisible] = useState(true)
-  const [scrolled, setScrolled] = useState(false)
-  const lastScrollY = useRef(0)
+  const [isOpen, setIsOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const [scrolled, setScrolled] = useState(false);
+  const lastScrollY = useRef(0);
 
   const toggleMenu = () => {
-    setIsOpen(!isOpen)
-    setMobileServicesOpen(false)
-  }
+    setIsOpen(!isOpen);
+    setMobileServicesOpen(false);
+  };
 
   useEffect(() => {
-    const TOLERANCE = 60
+    const TOLERANCE = 60;
     const handleScroll = () => {
-      const current = window.scrollY
-      setScrolled(current > 10)
+      const current = window.scrollY;
+      setScrolled(current > 10);
       if (current < 10) {
-        setVisible(true)
+        setVisible(true);
       } else if (current - lastScrollY.current > TOLERANCE) {
-        setVisible(false)
-        setDropdownOpen(false)
-        lastScrollY.current = current
+        setVisible(false);
+        setDropdownOpen(false);
+        lastScrollY.current = current;
       } else if (lastScrollY.current - current > TOLERANCE) {
-        setVisible(true)
-        lastScrollY.current = current
+        setVisible(true);
+        lastScrollY.current = current;
       }
-    }
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <motion.div
@@ -86,9 +86,7 @@ const NavBar = () => {
                 onMouseEnter={() => setDropdownOpen(true)}
                 onMouseLeave={() => setDropdownOpen(false)}
               >
-                <button
-                  className="flex items-center gap-1 px-3 py-2 text-base text-gray-700 hover:text-brand-hover transition-colors font-medium rounded-md cursor-pointer"
-                >
+                <button className="flex items-center gap-1 px-3 py-2 text-base text-gray-700 hover:text-brand-hover transition-colors font-medium rounded-md cursor-pointer">
                   {link.label}
                   <ChevronDown
                     className={`w-3.5 h-3.5 transition-transform duration-200 ${dropdownOpen ? "rotate-180" : ""}`}
@@ -129,7 +127,7 @@ const NavBar = () => {
                   {link.label}
                 </a>
               </div>
-            )
+            ),
           )}
         </nav>
 
@@ -208,7 +206,7 @@ const NavBar = () => {
                       {link.label}
                     </a>
                   </div>
-                )
+                ),
               )}
 
               <div className="pt-4">
@@ -225,7 +223,7 @@ const NavBar = () => {
         )}
       </AnimatePresence>
     </motion.div>
-  )
-}
+  );
+};
 
 export default NavBar;

@@ -34,9 +34,9 @@ const reasons = [
     },
     {
         icon: Network,
-        title: "Extensive Specialist Network",
+        title: "Mạng lưới rộng các chuyên khoa",
         description:
-            "Dr. Trang collaborates with numerous specialists both domestically and internationally to provide comprehensive care for patients with complex conditions.",
+            "Dr. Trang hợp tác với nhiều bác sĩ chuyên khoa trong và ngoài nước để chăm sóc toàn diện cho bệnh nhân mắc các bệnh lý phức tạp.",
         bg: "bg-pink-100",
         iconBg: "bg-pink-200",
         iconColor: "text-pink-600",
