@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef } from "react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import Grainient from "./Grainient";
 
