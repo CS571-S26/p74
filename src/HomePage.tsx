@@ -1,21 +1,29 @@
-import DoctorProfile from "./components/DoctorProfile";
-import FAQ from "./components/FAQ";
-import Hero from "./components/Hero";
-import Problems from "./components/Problems";
-import Services from "./components/Services";
-import Testimonials from "./components/Testimonials";
-import WhyChooseUs from "./components/WhyChooseUs";
+import { useState } from "react";
+import DoctorProfile from "./components/homepage/DoctorProfile";
+import FAQ from "./components/homepage/FAQ";
+import Hero from "./components/homepage/Hero";
+import Problems from "./components/homepage/Problems";
+import Services from "./components/homepage/Services";
+import Testimonials from "./components/homepage/Testimonials";
+import WhyChooseUs from "./components/homepage/WhyChooseUs";
+import AppointmentModal from "./components/appointment/AppointmentModal";
 
 export default function HomePage() {
+  const [modalOpen, setModalOpen] = useState(false);
+
   return (
     <div>
-      <Hero />
+      <Hero onBookAppointment={() => setModalOpen(true)} />
       <Problems />
       <Services />
-      <WhyChooseUs />
+      <WhyChooseUs onBookAppointment={() => setModalOpen(true)} />
       <Testimonials />
       <DoctorProfile />
       <FAQ />
+      <AppointmentModal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+      />
     </div>
   );
 }

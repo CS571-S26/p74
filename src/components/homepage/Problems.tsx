@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Heart, Eye, MapPin, Glasses, type LucideIcon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import Header from "./Header";
+import Header from "../ui/Header";
 
 interface Problem {
   icon: LucideIcon;

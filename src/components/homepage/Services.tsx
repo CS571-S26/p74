@@ -1,5 +1,5 @@
 import { ArrowRight } from "lucide-react";
-import Header from "./Header";
+import Header from "../ui/Header";
 
 const services = [
   {

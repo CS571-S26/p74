@@ -1,5 +1,5 @@
 import { UserCheck, DollarSign, Cpu, Network } from "lucide-react";
-import Header from "./Header";
+import Header from "../ui/Header";
 
 const reasons = [
   {
@@ -44,7 +44,11 @@ const reasons = [
   },
 ];
 
-export default function WhyChooseUs() {
+export default function WhyChooseUs({
+  onBookAppointment,
+}: {
+  onBookAppointment?: () => void;
+}) {
   return (
     <section className="relative bg-white py-20 lg:py-28">
       <div className="max-w-7xl mx-auto px-10">
@@ -79,12 +83,12 @@ export default function WhyChooseUs() {
 
         {/* CTA */}
         <div className="text-center mt-12">
-          <a
-            href="#"
-            className="inline-block bg-brand hover:bg-brand-hover text-white font-semibold text-base px-8 py-4 rounded-full shadow-lg shadow-brand-muted transition-all duration-200"
+          <button
+            onClick={onBookAppointment}
+            className="inline-block bg-brand hover:bg-brand-hover text-white font-semibold text-base px-8 py-4 rounded-full shadow-lg shadow-brand-muted transition-all duration-200 cursor-pointer"
           >
             Book Appointment
-          </a>
+          </button>
         </div>
       </div>
     </section>

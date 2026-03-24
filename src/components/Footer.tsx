@@ -1,14 +1,15 @@
-import { Share2, MessageCircle, Link, Globe, Send, PenTool } from "lucide-react";
+import { Share2, MessageCircle, Link as LinkIcon, Globe, Send, PenTool } from "lucide-react";
+import { Link } from "react-router";
 import logo from "../assets/logo.svg";
 
 const navLinks = [
   { label: "About", href: "#" },
   { label: "Services", href: "#" },
   { label: "FAQs", href: "#" },
-  { label: "Contact", href: "#" },
+  { label: "Contact", href: "/contact" },
 ];
 
-const socialIcons = [Share2, MessageCircle, Link, Globe, Send, PenTool];
+const socialIcons = [Share2, MessageCircle, LinkIcon, Globe, Send, PenTool];
 
 export default function Footer() {
   return (
@@ -24,15 +25,25 @@ export default function Footer() {
 
         {/* Nav links */}
         <nav className="flex flex-wrap justify-center gap-x-8 gap-y-3 text-md">
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="hover:text-white transition-colors"
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) =>
+            link.href.startsWith("/") ? (
+              <Link
+                key={link.label}
+                to={link.href}
+                className="hover:text-white transition-colors"
+              >
+                {link.label}
+              </Link>
+            ) : (
+              <a
+                key={link.label}
+                href={link.href}
+                className="hover:text-white transition-colors"
+              >
+                {link.label}
+              </a>
+            )
+          )}
         </nav>
 
         {/* Social icons */}

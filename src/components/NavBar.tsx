@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, ChevronDown } from "lucide-react";
+import { Link } from "react-router";
 import logoImg from "../assets/logo.svg";
 
 const services = [
@@ -16,7 +17,7 @@ const navLinks = [
   { label: "About", href: "#" },
   { label: "Services", href: "#", dropdown: services },
   { label: "FAQs", href: "#" },
-  { label: "Contact", href: "#" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const NavBar = () => {
@@ -118,6 +119,15 @@ const NavBar = () => {
                   )}
                 </AnimatePresence>
               </div>
+            ) : link.href.startsWith("/") ? (
+              <div key={link.label}>
+                <Link
+                  to={link.href}
+                  className="block px-3 py-2 text-base text-gray-700 hover:text-brand-hover transition-colors font-medium rounded-md"
+                >
+                  {link.label}
+                </Link>
+              </div>
             ) : (
               <div key={link.label}>
                 <a
@@ -133,12 +143,12 @@ const NavBar = () => {
 
         {/* Desktop CTA */}
         <div className="hidden lg:block">
-          <a
-            href="#"
+          <Link
+            to="/contact"
             className="inline-flex items-center justify-center px-5 py-2 text-base text-white bg-brand rounded-full hover:bg-brand-hover transition-colors font-semibold shadow-md shadow-brand-muted"
           >
             Book appointment
-          </a>
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}
@@ -196,6 +206,16 @@ const NavBar = () => {
                       )}
                     </AnimatePresence>
                   </div>
+                ) : link.href.startsWith("/") ? (
+                  <div key={link.label}>
+                    <Link
+                      to={link.href}
+                      className="block text-base text-gray-900 font-medium py-3"
+                      onClick={toggleMenu}
+                    >
+                      {link.label}
+                    </Link>
+                  </div>
                 ) : (
                   <div key={link.label}>
                     <a
@@ -210,13 +230,13 @@ const NavBar = () => {
               )}
 
               <div className="pt-4">
-                <a
-                  href="#"
+                <Link
+                  to="/contact"
                   className="inline-flex items-center justify-center w-full px-5 py-3 text-base text-white bg-brand rounded-full hover:bg-brand-hover transition-colors font-semibold"
                   onClick={toggleMenu}
                 >
                   Book appointment
-                </a>
+                </Link>
               </div>
             </div>
           </motion.div>

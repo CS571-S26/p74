@@ -1,4 +1,4 @@
-import Stack from "./Stack";
+import Stack from "../ui/Stack";
 
 const images = [
   [
@@ -19,7 +19,11 @@ const images = [
   ],
 ];
 
-export default function Hero() {
+export default function Hero({
+  onBookAppointment,
+}: {
+  onBookAppointment?: () => void;
+}) {
   return (
     <section className="relative overflow-hidden bg-white">
       {/* Background subtle blobs */}
@@ -42,12 +46,12 @@ export default function Hero() {
             medical professionals.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-            <a
-              href="#"
-              className="inline-block bg-brand hover:bg-brand-hover text-white font-semibold text-base px-8 py-4 rounded-full shadow-lg shadow-brand-muted transition-all duration-200"
+            <button
+              onClick={onBookAppointment}
+              className="inline-block bg-brand hover:bg-brand-hover text-white font-semibold text-base px-8 py-4 rounded-full shadow-lg shadow-brand-muted transition-all duration-200 cursor-pointer"
             >
               Book appointment
-            </a>
+            </button>
             <a
               href="#"
               className="inline-block border border-gray-300 hover:border-brand-accent text-gray-700 hover:text-brand-hover font-semibold text-base px-8 py-4 rounded-full transition-all duration-200 hover:bg-brand-light"

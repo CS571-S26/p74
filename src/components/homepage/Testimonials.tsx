@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
-import Grainient from "./Grainient";
+import Grainient from "../ui/Grainient";
 
 const testimonials = [
   {

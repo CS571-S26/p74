@@ -1,5 +1,5 @@
 import { Award } from "lucide-react";
-import drTrangImg from "../assets/dr_trang.png";
+import drTrangImg from "../../assets/dr_trang.png";
 
 const certifications = [
   "Uveitis Certification - International Uveitis Study Group (2022-2023)",
