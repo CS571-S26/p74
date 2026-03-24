@@ -1,6 +1,7 @@
-import { Share2, MessageCircle, Link as LinkIcon, Globe, Send, PenTool } from "lucide-react";
+import { PhoneCall, MapPin, Mail } from "lucide-react";
 import { Link } from "react-router";
 import logo from "../assets/logo.svg";
+import ZaloLogo from "../assets/zalo.svg";
 
 const navLinks = [
   { label: "About", href: "#" },
@@ -9,7 +10,7 @@ const navLinks = [
   { label: "Contact", href: "/contact" },
 ];
 
-const socialIcons = [Share2, MessageCircle, LinkIcon, Globe, Send, PenTool];
+const socialIcons = [PhoneCall, MapPin, Mail];
 
 export default function Footer() {
   return (
@@ -57,6 +58,9 @@ export default function Footer() {
               <Icon size={24} />
             </a>
           ))}
+          <a href="#" className="hover:text-white transition-colors">
+            <img src={ZaloLogo} alt="Zalo" className="size-7" />
+          </a>
         </div>
         
         <p className="text-sm">
