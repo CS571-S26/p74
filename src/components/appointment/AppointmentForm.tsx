@@ -38,8 +38,15 @@ export default function AppointmentForm() {
   });
 
   const onSubmit = (_data: AppointmentFormData) => {
-    setSubmitted(true);
-    // TODO: send data to backend (or firebase)
+    fetch("insert-link-here", {
+      method: "POST",
+      body: JSON.stringify(_data),
+    }).then((res) => {
+      if (res.ok) {
+        reset();
+        setSubmitted(true);
+      }
+    })
   };
 
   const handleReset = () => {
