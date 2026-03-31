@@ -22,6 +22,8 @@ const appointmentSchema = z.object({
 
 type AppointmentFormData = z.infer<typeof appointmentSchema>;
 
+const scriptLink: string = import.meta.env.VITE_GOOGLE_SCRIPT_LINK || "";
+
 const inputClasses =
   "w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-brand/50 focus:border-brand transition-colors";
 
@@ -32,29 +34,26 @@ export default function AppointmentForm() {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<AppointmentFormData>({
     resolver: zodResolver(appointmentSchema),
   });
 
-  const onSubmit = (_data: AppointmentFormData) => {
-    fetch("insert-link-here", {
+  const onSubmit = async (_data: AppointmentFormData) => {
+    const res = await fetch(scriptLink, {
       method: "POST",
       body: JSON.stringify(_data),
-    }).then((res) => {
-      if (res.ok) {
-        reset();
-        setSubmitted(true);
-      }
-    })
+    });
+    if (res.ok) {
+      reset();
+      setSubmitted(true);
+    }
   };
 
   const handleReset = () => {
     setSubmitted(false);
     reset();
   };
-
-  // TODO: loading spinner
   
   // Success message
   if (submitted) {
@@ -96,6 +95,7 @@ export default function AppointmentForm() {
           placeholder="Enter your full name"
           className={inputClasses}
           {...register("fullName")}
+          disabled={isSubmitting}
         />
         {errors.fullName && (
           <p className="text-red-500 text-sm mt-1">{errors.fullName.message}</p>
@@ -117,6 +117,7 @@ export default function AppointmentForm() {
             placeholder="Your phone number"
             className={inputClasses}
             {...register("phone")}
+            disabled={isSubmitting}
           />
           {errors.phone && (
             <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>
@@ -135,6 +136,7 @@ export default function AppointmentForm() {
             placeholder="your@email.com"
             className={inputClasses}
             {...register("email")}
+            disabled={isSubmitting}
           />
           {errors.email && (
             <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
@@ -179,6 +181,7 @@ export default function AppointmentForm() {
             id="preferredDate"
             className={inputClasses}
             {...register("preferredDate")}
+            disabled={isSubmitting}
           />
           {errors.preferredDate && (
             <p className="text-red-500 text-sm mt-1">
@@ -203,15 +206,18 @@ export default function AppointmentForm() {
           placeholder="Any additional information or concerns..."
           className={`${inputClasses} resize-none`}
           {...register("message")}
+          disabled={isSubmitting}
         />
       </div>
 
       {/* Submit */}
       <button
         type="submit"
-        className="w-full bg-brand hover:bg-brand-hover text-white font-semibold text-base px-8 py-4 rounded-full shadow-lg shadow-brand-muted transition-all duration-200 cursor-pointer"
+        disabled={isSubmitting}
+        className="w-full bg-brand hover:bg-brand-hover text-white font-semibold text-base px-8 py-4 
+        rounded-full shadow-lg shadow-brand-muted transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        Book Appointment
+        {isSubmitting ? "Submitting..." : "Book Appointment"}
       </button>
     </form>
   );
