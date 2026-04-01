@@ -6,6 +6,7 @@ import ZaloLogo from "../assets/zalo.svg";
 const navLinks = [
   { label: "About", href: "#" },
   { label: "Services", href: "#" },
+  { label: "Color Vision Test", href: "/color-test" },
   { label: "FAQs", href: "#" },
   { label: "Contact", href: "/contact" },
 ];
