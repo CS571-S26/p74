@@ -4,7 +4,7 @@ import logo from "../assets/logo.svg";
 import ZaloLogo from "../assets/zalo.svg";
 
 const navLinks = [
-  { label: "About", href: "#" },
+  { label: "About", href: "/about" },
   { label: "Services", href: "#" },
   { label: "Color Vision Test", href: "/color-test" },
   { label: "FAQs", href: "#" },

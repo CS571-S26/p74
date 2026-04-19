@@ -14,7 +14,7 @@ const services = [
 ];
 
 const navLinks = [
-  { label: "About", href: "#" },
+  { label: "About", href: "/about" },
   { label: "Services", href: "#", dropdown: services },
   { label: "Color Vision Test", href: "/color-test" },
   { label: "FAQs", href: "#" },

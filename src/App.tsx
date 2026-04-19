@@ -5,6 +5,7 @@ import HomePage from "./HomePage";
 import ContactPage from "./ContactPage";
 import ColorTestPage from "./ColorTestPage";
 import NotFound from "./NotFound";
+import AboutPage from "./AboutPage";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route index element={<HomePage />} />
         <Route path="contact" element={<ContactPage />} />
         <Route path="color-test" element={<ColorTestPage />} />
+        <Route path="about" element={<AboutPage />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
